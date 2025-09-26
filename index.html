@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echelon Realty - Sydney's Premier Luxury Real Estate</title>
+    <meta name="description" content="Ascend to exceptional living with Echelon Realty, Sydney's premier luxury real estate agency. Exclusive properties from $2M to $20M+">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Gold Particle Effects -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <svg class="logo-svg" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="40" class="logo-text">ECHELON</text>
+                    <line x1="0" y1="50" x2="200" y2="50" class="logo-line"/>
+                    <text x="0" y="58" class="logo-subtitle">REALTY</text>
+                </svg>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#properties" class="nav-link">Properties</a></li>
+                <li class="nav-item"><a href="#sell" class="nav-link">Sell</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#agents" class="nav-link">Agents</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <!-- Video Background -->
+        <div class="video-container">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-luxury-houses-3791/1080p.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="hero-headline">
+                <span class="headline-word" data-delay="0">ASCEND</span>
+                <span class="headline-word" data-delay="200">TO</span>
+                <span class="headline-word" data-delay="400">EXCEPTIONAL</span>
+                <span class="headline-word" data-delay="600">LIVING</span>
+            </h1>
+            <p class="hero-subheading">Sydney's Premier Luxury Real Estate</p>
+
+            <!-- Premium Search Widget -->
+            <div class="search-widget">
+                <div class="search-container">
+                    <div class="search-grid">
+                        <div class="search-field">
+                            <label>LOCATION</label>
+                            <input type="text" id="suburb-input" placeholder="Suburb or Postcode" autocomplete="off">
+                            <div class="autocomplete-dropdown" id="autocomplete"></div>
+                        </div>
+                        <div class="search-field">
+                            <label>PRICE RANGE</label>
+                            <select id="price-range">
+                                <option value="">Any Price</option>
+                                <option value="2-3">$2M - $3M</option>
+                                <option value="3-5">$3M - $5M</option>
+                                <option value="5-8">$5M - $8M</option>
+                                <option value="8-12">$8M - $12M</option>
+                                <option value="12-20">$12M - $20M</option>
+                                <option value="20+">$20M+</option>
+                            </select>
+                        </div>
+                        <div class="search-field">
+                            <label>PROPERTY TYPE</label>
+                            <select id="property-type">
+                                <option value="">All Types</option>
+                                <option value="house">House</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="penthouse">Penthouse</option>
+                            </select>
+                        </div>
+                        <button class="search-button">
+                            SEARCH EXCLUSIVELY <span class="arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll to Explore</span>
+        </div>
+    </section>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav">
+            <li><a href="#properties">Properties</a></li>
+            <li><a href="#sell">Sell</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#agents">Agents</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

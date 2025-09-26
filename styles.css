@@ -1,0 +1,747 @@
+/* Echelon Realty - Luxury Real Estate Styles */
+
+:root {
+    --echelon-black: #010101;
+    --echelon-gold: #C9A961;
+    --pure-white: #FFFFFF;
+    --warm-gray: #F7F7F7;
+    --accent-navy: #1A2332;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.18);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--echelon-black);
+    color: var(--pure-white);
+    overflow-x: hidden;
+    cursor: none;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--echelon-gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+    mix-blend-mode: difference;
+}
+
+.cursor-follower {
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.3s ease;
+}
+
+.custom-cursor.hover {
+    transform: scale(2);
+    background-color: var(--echelon-gold);
+}
+
+/* Particles Container */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--echelon-gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-particle 15s infinite;
+}
+
+@keyframes float-particle {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(0deg);
+    }
+    10% {
+        opacity: 0.4;
+    }
+    90% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(720deg);
+    }
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 0;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar.scrolled {
+    background: rgba(1, 1, 1, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    opacity: 0;
+    animation: logo-reveal 1.5s ease forwards;
+    animation-delay: 0.5s;
+}
+
+.logo-svg {
+    width: 200px;
+    height: 60px;
+}
+
+.logo-text {
+    fill: var(--pure-white);
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.logo-line {
+    stroke: var(--echelon-gold);
+    stroke-width: 1;
+    opacity: 0.8;
+}
+
+.logo-subtitle {
+    fill: var(--echelon-gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 6px;
+}
+
+@keyframes logo-reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 50px;
+}
+
+.nav-link {
+    color: var(--pure-white);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--echelon-gold);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--echelon-gold);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.nav-hamburger span {
+    width: 25px;
+    height: 2px;
+    background: var(--pure-white);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(1, 1, 1, 0.4) 0%,
+        rgba(1, 1, 1, 0.6) 50%,
+        rgba(1, 1, 1, 0.8) 100%
+    );
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+.hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.headline-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: headline-fade 0.8s ease forwards;
+}
+
+@keyframes headline-fade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-subheading {
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: var(--echelon-gold);
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: subtitle-fade 1s ease forwards;
+    animation-delay: 1s;
+}
+
+@keyframes subtitle-fade {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Premium Search Widget - $20K Worth */
+.search-widget {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: widget-slide 1s ease forwards;
+    animation-delay: 1.5s;
+}
+
+@keyframes widget-slide {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.search-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1.5fr auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.search-field {
+    position: relative;
+}
+
+.search-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--echelon-gold);
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+/* Premium Input & Select Styling */
+.search-field input,
+.search-field select {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: var(--pure-white);
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    font-weight: 400;
+}
+
+/* Custom Select Arrow - Remove Default */
+.search-field select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 18px;
+    padding-right: 45px;
+}
+
+/* Premium Focus States with Gold Glow */
+.search-field input:focus,
+.search-field select:focus {
+    outline: none;
+    border-color: var(--echelon-gold);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 0 0 3px rgba(201, 169, 97, 0.1),
+        0 4px 20px rgba(201, 169, 97, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Subtle Hover States */
+.search-field input:hover,
+.search-field select:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Premium Placeholder Styling */
+.search-field input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* Select Options */
+.search-field select option {
+    background: var(--echelon-black);
+    color: var(--pure-white);
+    padding: 10px;
+}
+
+/* Ensure Perfect Cursor States */
+.search-field input,
+.search-field select,
+.search-button {
+    cursor: pointer;
+}
+
+.search-field input:focus,
+.search-field select:focus {
+    cursor: text;
+}
+
+.search-field select:focus {
+    cursor: pointer;
+}
+
+/* Autocomplete Dropdown */
+.autocomplete-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(1, 1, 1, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    margin-top: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 100;
+}
+
+.autocomplete-dropdown.active {
+    display: block;
+}
+
+.autocomplete-item {
+    padding: 12px 15px;
+    color: var(--pure-white);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.autocomplete-item:hover {
+    background: rgba(201, 169, 97, 0.1);
+}
+
+.autocomplete-item.selected {
+    background: rgba(201, 169, 97, 0.2);
+}
+
+/* Premium Search Button - Rolls Royce Level */
+.search-button {
+    height: 50px;
+    padding: 0 40px;
+    background: var(--echelon-gold);
+    color: var(--echelon-black);
+    border: none;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 4px 20px rgba(201, 169, 97, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Elegant Arrow Styling */
+.search-button .arrow {
+    font-size: 16px;
+    font-weight: 300;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+
+/* Premium Hover Effects */
+.search-button:hover {
+    background: #D4B670;
+    transform: scale(1.02) translateY(-1px);
+    box-shadow:
+        0 8px 30px rgba(201, 169, 97, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.search-button:hover .arrow {
+    transform: translateX(3px);
+}
+
+/* Active State */
+.search-button:active {
+    transform: scale(0.98) translateY(0);
+    box-shadow:
+        0 2px 10px rgba(201, 169, 97, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.1s ease;
+}
+
+/* Subtle shimmer effect on hover */
+.search-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.6s ease;
+}
+
+.search-button:hover::before {
+    left: 100%;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+.scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, var(--echelon-gold));
+    margin: 0 auto 10px;
+    animation: scroll-line 2s ease-in-out infinite;
+}
+
+@keyframes scroll-line {
+    0% {
+        transform: scaleY(0);
+        transform-origin: top;
+    }
+    50% {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+    51% {
+        transform-origin: bottom;
+    }
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+}
+
+.scroll-indicator span {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--echelon-gold);
+    opacity: 0.8;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: rgba(1, 1, 1, 0.98);
+    backdrop-filter: blur(20px);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-nav {
+    list-style: none;
+    text-align: center;
+}
+
+.mobile-nav li {
+    margin: 30px 0;
+}
+
+.mobile-nav a {
+    color: var(--pure-white);
+    text-decoration: none;
+    font-size: 24px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.mobile-nav a:hover {
+    color: var(--echelon-gold);
+}
+
+/* Premium Responsive Design */
+@media (max-width: 1024px) {
+    .search-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .search-button {
+        grid-column: span 2;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .search-container {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-hamburger {
+        display: flex;
+    }
+
+    .nav-hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .hero-headline {
+        font-size: clamp(2rem, 10vw, 4rem);
+    }
+
+    .search-container {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .search-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .search-button {
+        grid-column: span 1;
+        width: 100%;
+        height: 52px;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+    }
+
+    .search-field label {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        margin-bottom: 6px;
+    }
+
+    .search-field input,
+    .search-field select {
+        height: 48px;
+        font-size: 15px;
+    }
+
+    .custom-cursor,
+    .cursor-follower {
+        display: none;
+    }
+
+    body {
+        cursor: auto;
+    }
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Haptic Feedback Simulation */
+@media (max-width: 768px) {
+    .search-button:active,
+    .nav-link:active,
+    .mobile-nav a:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
