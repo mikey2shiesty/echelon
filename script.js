@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     initHeadlineAnimation();
     initSearchWidget();
+    initPropertyCards();
+    initCarousel();
+    initStatsCounter();
+    initPropertyHearts();
 });
 
 // Custom Cursor
@@ -441,3 +445,166 @@ function preloadResources() {
 }
 
 preloadResources();
+
+// SEGMENT 2 JavaScript Functions
+
+function initPropertyCards() {
+    const propertyCards = document.querySelectorAll('.property-card');
+
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('reveal');
+                }, index * 100);
+                cardObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    propertyCards.forEach(card => cardObserver.observe(card));
+}
+
+function initCarousel() {
+    const carouselContainer = document.querySelector('.spotlight-carousel');
+    if (!carouselContainer) return;
+
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    let currentSlide = 0;
+    let autoplayInterval;
+    let isPaused = false;
+
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('carousel-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    function goToSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+
+        currentSlide = n;
+        if (currentSlide >= slides.length) currentSlide = 0;
+        if (currentSlide < 0) currentSlide = slides.length - 1;
+
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+        if (!isPaused) {
+            goToSlide(currentSlide + 1);
+        }
+    }
+
+    function startAutoplay() {
+        autoplayInterval = setInterval(nextSlide, 4000);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+
+    carouselContainer.addEventListener('mouseenter', () => {
+        isPaused = true;
+        stopAutoplay();
+    });
+
+    carouselContainer.addEventListener('mouseleave', () => {
+        isPaused = false;
+        startAutoplay();
+    });
+
+    startAutoplay();
+}
+
+function initStatsCounter() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
+
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+                statNumbers.forEach(stat => {
+                    const target = parseFloat(stat.getAttribute('data-target'));
+                    const duration = 2000;
+                    const increment = target / (duration / 16);
+                    let current = 0;
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            stat.textContent = target % 1 === 0 ? target : target.toFixed(1);
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = current % 1 === 0 ? Math.floor(current) : current.toFixed(1);
+                        }
+                    }, 16);
+                });
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+
+    const statsSection = document.querySelector('.echelon-difference');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+}
+
+function initPropertyHearts() {
+    const hearts = document.querySelectorAll('.property-heart');
+
+    hearts.forEach(heart => {
+        heart.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('saved');
+
+            if (window.innerWidth <= 768 && navigator.vibrate) {
+                navigator.vibrate(30);
+            }
+
+            const propertyCard = this.closest('.property-card');
+            const address = propertyCard.querySelector('.property-address').textContent;
+
+            if (this.classList.contains('saved')) {
+                showNotification(`${address} saved to favorites`, 'success');
+            } else {
+                showNotification(`${address} removed from favorites`, 'info');
+            }
+        });
+    });
+}
+
+document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        showNotification(`Filtering by ${this.querySelector('h3').textContent}...`, 'info');
+
+        setTimeout(() => {
+            showNotification(`Found ${Math.floor(Math.random() * 30) + 10} properties`, 'success');
+        }, 1000);
+    });
+});
+
+document.querySelector('.spotlight-button')?.addEventListener('click', function() {
+    if (window.innerWidth <= 768 && navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+    showNotification('Scheduling your private viewing...', 'success');
+    setTimeout(() => {
+        showNotification('Our agent will contact you within 24 hours', 'success');
+    }, 2000);
+});
